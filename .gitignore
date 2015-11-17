@@ -1,37 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Untitled Document</title>
 
-<script type="text/javascript">
-function Menu(id)
-{
-var menu = document.getElementById('menu_'+ id).style;
-if (menu.display == 'none')
-{
-menu.display = 'block';
-}
-else
-{
-menu.display = 'none';
-}
+<script>
+
+
+var div1;
+var leftPos = 300;
+var rightPos = 0;
+var topPos = 0;
+var downPos = 0;
+
+var a = function () {
+  div1 = document.getElementsByTagName("div")[0];
+  div1.style.left = leftPos + "px";
+  leftPos = leftPos - 10;
+ 
 }
 </script>
 </head>
+
 <body>
-<ul>
-<li onclick="javascript:Menu('1')"><a href="#">Home</a></li>
-</ul>
-
-<ul>
-<li onclick="javascript:Menu('2')"><a href="#">Products</a></li>
-<ul id="menu_2" style="display:none;">
-<li><a href="#">women</a></li>
-<li><a href="#">men</a></li>
-<li><a href="#">children</a></li>
-</ul>
-</ul>
-
-<ul>
-<li onclick="javascript:Menu('3')"><a href="#">Shopping</a></li>
-</ul>
+<button id="top">Up</button>
+<button id="right">Right</button>
+<button id="down">Down</button>
+<button id="left" onclick="a()">Left</button>
+<div style="left: 300px; position: relative;">Text</div>
 </body>
 </html>
