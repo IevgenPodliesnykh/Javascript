@@ -1,33 +1,83 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
-<html>
+
+	
+<!DOCTYPE html>
+<html lang="ru">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Untitled Document</title>
-
-<script>
-
-
-var div1;
-var leftPos = 300;
-var rightPos = 0;
-var topPos = 0;
-var downPos = 0;
-
-var a = function () {
-  div1 = document.getElementsByTagName("div")[0];
-  div1.style.left = leftPos + "px";
-  leftPos = leftPos - 10;
- 
-}
-</script>
+	<title>Slider</title>
+	<meta charset="utf-8">
 </head>
-
+<style>
+#main {
+	position:relative;
+	margin: 100px auto;
+	padding: 5px;
+	width: 660px;
+	height:360px;
+	background-color: silver;
+	border: 5px solid grey;
+	border-radius:15px;
+}
+#scr {
+	margin:20px auto;
+	width: 600px;
+	height: 320px;
+	margin-top:20px;
+	background-color: white;
+	background-size:cover;
+	border: 2px solid black;
+	border-radius:10px;
+}
+button {
+	position: absolute;
+	top: 150px;
+	width: 25px;
+	height: 70px;
+	font: 12pt arial,tahoma,sans-serif;
+	text-align: center;
+}
+.left {
+	left:5px;
+}
+.right {
+	right:5px;
+}
+</style>
+<script>
+var slider = {
+	slides:['Pic-1.jpg','Pic-2.jpg','Pic-3.jpg','Pic-4.jpg','Pic-5.jpg'],
+	frame:0, // текущий кадр для отбражения - индекс картинки из массива
+	set: function(image) { // установка нужного фона слайдеру
+		document.getElementById("scr").style.backgroundImage = "url("+image+")";
+	},
+	init: function() { // запуск слайдера с картинкой с нулевым индексом
+		this.set(this.slides[this.frame]);
+	},
+	left: function() { // крутим на один кадр влево
+		this.frame--;
+		if(this.frame < 0) this.frame = this.slides.length-1;
+		this.set(this.slides[this.frame]);
+	},
+	right: function() { // крутим на один кадр вправо
+		this.frame++;
+		if(this.frame == this.slides.length) this.frame = 0;
+		this.set(this.slides[this.frame]);		
+	}
+};
+window.onload = function() { // запуск слайдера после загрузки документа
+	slider.init();
+	setInterval(function() { // ставим пятисекундный интервал для перелистывания картинок
+		slider.right();
+	},5000);
+};
+</script>
 <body>
-<button id="top">Up</button>
-<button id="right">Right</button>
-<button id="down">Down</button>
-<button id="left" onclick="a()">Left</button>
-<div style="left: 300px; position: relative;">Text</div>
+<div id="main">
+	<button class="left" onclick="slider.left();"><</button>
+	<div id="scr"></div>
+	<button class="right" onclick="slider.right();">></button>
+</div>	
 </body>
 </html>
+
+
+
